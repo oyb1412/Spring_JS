@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Gugi&display=swap');
+
+body {
+  font-family: 'Gugi', sans-serif;
+  background-color: #121212;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+/* 버튼 스타일 (footer/sidebar에서 가져오던 거) */
+.btn {
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.btn.confirm {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.btn.cancel {
+  background-color: #f44336;
+  color: white;
+}
+
+/* 신고 페이지 기본 레이아웃 */
+#report-container {
+  max-width: 600px;
+  margin: 30px auto;
+  background-color: #1e1e1e;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255,255,255,0.1);
+}
+
+.report-row {
+  margin-bottom: 20px;
+}
+
+.report-value {
+  display: inline-block;
+  padding-left: 10px;
+  font-weight: bold;
+}
+
+.report-options label {
+  display: inline-block;
+  margin-right: 15px;
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  background-color: #333;
+  color: white;
+  border: 1px solid #555;
+  border-radius: 5px;
+  resize: none;
+}

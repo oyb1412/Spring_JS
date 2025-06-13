@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>유저 관리</title>
+  
+  <link rel="stylesheet" href="/css/admin.css">
+  <link rel="stylesheet" href="/css/common/header.css" />
+  <link rel="stylesheet" href="/css/common/sidebar.css" />
+  <link rel="stylesheet" href="/css/common/footer.css" />
+</head>
+<body>
+
+  <!-- 조각 삽입용 영역 -->
+  <div id="header-area"></div>
+  <div id="sidebar-area"></div>
+
+  <div id="main-content">
+    <h2 id="admin-title">유저 관리</h2>
+    <div class="user-table-container">
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th>유저 번호</th>
+                    <th>유저 이름</th>
+                    <th>유저 닉네임</th>
+                    <th>유저 가입일</th>
+                    <th>유저 밴 상태</th>
+                    <th>유저 밴 설정</th>
+                </tr>
+            </thead>
+            <tbody  id="user-section">
+               
+            </tbody>
+        </table>
+    </div>
+</div>
+
+  <div id="footer-area"></div>
+
+  <!-- 조각 로더 -->
+  <script src="/js/layout-loader.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

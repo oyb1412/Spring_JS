@@ -1,0 +1,40 @@
+#main-content {
+    margin-left: 200px; /* 사이드바 고려 */
+    padding: 40px 20px;
+    min-height: calc(100vh - 100px); /* header/footer 제외 */
+    overflow-y: auto;
+}
+
+#admin-title
+{
+    margin-left: 700px;
+}
+
+.user-table-container {
+    border: 1px solid #7cbf3f;
+    padding: 20px;
+    background-color: white;
+    overflow-x: auto;
+}
+
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.user-table th, .user-table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    font-size: 14px;
+}
+
+.user-table th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+select {
+    padding: 5px;
+    font-size: 14px;
+}
