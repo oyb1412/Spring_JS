@@ -74,6 +74,7 @@ fetch("/api/admin/data")
             else if(data.success)
             {
                 alert(data.success);
+                location.reload();
             }
         })
     })

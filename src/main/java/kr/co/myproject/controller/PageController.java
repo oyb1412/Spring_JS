@@ -45,93 +45,93 @@ public class PageController {
 	private final Logger logger = LoggerFactory.getLogger(PageController.class);
 
 	
-	@GetMapping("/board-list-page")
-	public String boardList(@RequestParam(defaultValue = "1") int page,
-							@RequestParam(required = false) String searchType,
-							@RequestParam(required = false) String keyword,
-							@RequestParam(required = false) String sortField,
-							@RequestParam(required = false) String sortOrder,
-							Model model)
-	{
-		int pageSize = 10;
-		List<Board> boardList = new ArrayList<>();
-		int totalCount = 0;
+	// @GetMapping("/board-list-page")
+	// public String boardList(@RequestParam(defaultValue = "1") int page,
+	// 						@RequestParam(required = false) String searchType,
+	// 						@RequestParam(required = false) String keyword,
+	// 						@RequestParam(required = false) String sortField,
+	// 						@RequestParam(required = false) String sortOrder,
+	// 						Model model)
+	// {
+	// 	int pageSize = 10;
+	// 	List<Board> boardList = new ArrayList<>();
+	// 	int totalCount = 0;
 
-		if (keyword == null || keyword.trim().isEmpty()) {
-    		keyword = null; 
-    		searchType = null; 
-		}
+	// 	if (keyword == null || keyword.trim().isEmpty()) {
+    // 		keyword = null; 
+    // 		searchType = null; 
+	// 	}
 		
-		//1.검색만 있는 경우
-		if ((searchType != null && keyword != null && !keyword.trim().isEmpty())
-		&& (sortField == null || sortField.trim().isEmpty() || "default".equals(sortField))) {
-			boardList = boardService.searchBoardListPaged(searchType, keyword);
-		}
-		//2.정렬만 있는 경우
-		if((searchType == null || keyword == null || keyword.trim().isEmpty())
-		&& sortField != null && !sortField.trim().isEmpty() && !"default".equals(sortField))
-		{
-			switch (sortField) {
-				case "view":
-					boardList = boardService.getBoardListDescViewCount();
-					break;
-				case "comment":
-					boardList = boardService.getBoardListDescCommentCount();
-					break;
-				case "date":
-					boardList = boardService.getBoardListIndate();
-					break;
-			}
-			if("desc".equals(sortOrder))
-			{
-				Collections.reverse(boardList);
-			}
-		}
+	// 	//1.검색만 있는 경우
+	// 	if ((searchType != null && keyword != null && !keyword.trim().isEmpty())
+	// 	&& (sortField == null || sortField.trim().isEmpty() || "default".equals(sortField))) {
+	// 		boardList = boardService.searchBoardListPaged(searchType, keyword);
+	// 	}
+	// 	//2.정렬만 있는 경우
+	// 	if((searchType == null || keyword == null || keyword.trim().isEmpty())
+	// 	&& sortField != null && !sortField.trim().isEmpty() && !"default".equals(sortField))
+	// 	{
+	// 		switch (sortField) {
+	// 			case "view":
+	// 				boardList = boardService.getBoardListDescViewCount();
+	// 				break;
+	// 			case "comment":
+	// 				boardList = boardService.getBoardListDescCommentCount();
+	// 				break;
+	// 			case "date":
+	// 				boardList = boardService.getBoardListIndate();
+	// 				break;
+	// 		}
+	// 		if("desc".equals(sortOrder))
+	// 		{
+	// 			Collections.reverse(boardList);
+	// 		}
+	// 	}
 
-		//3.검색, 정렬 모두 해야하는 경우
-		if((searchType != null && keyword != null && !keyword.trim().isEmpty()) 
-		&& sortField != null && !sortField.trim().isEmpty() && !"default".equals(sortField))
-		{
-			switch (sortField) {
-				case "view":
-					boardList = boardService.searchBoardListPagedDescViewCount(searchType, keyword);
-					break;
-				case "comment":
-					boardList = boardService.searchBoardListPagedDescCommentCount(searchType, keyword);
-					break;
-				case "date":
-					boardList = boardService.searchBoardListPagedDescIndate(searchType, keyword);
-					break;
-			}
-			if("desc".equals(sortOrder))
-			{
-				Collections.reverse(boardList);
-			}
+	// 	//3.검색, 정렬 모두 해야하는 경우
+	// 	if((searchType != null && keyword != null && !keyword.trim().isEmpty()) 
+	// 	&& sortField != null && !sortField.trim().isEmpty() && !"default".equals(sortField))
+	// 	{
+	// 		switch (sortField) {
+	// 			case "view":
+	// 				boardList = boardService.searchBoardListPagedDescViewCount(searchType, keyword);
+	// 				break;
+	// 			case "comment":
+	// 				boardList = boardService.searchBoardListPagedDescCommentCount(searchType, keyword);
+	// 				break;
+	// 			case "date":
+	// 				boardList = boardService.searchBoardListPagedDescIndate(searchType, keyword);
+	// 				break;
+	// 		}
+	// 		if("desc".equals(sortOrder))
+	// 		{
+	// 			Collections.reverse(boardList);
+	// 		}
 
-		}
+	// 	}
 
-		//4.검색, 정렬 아무것도 하지 않는 경우
-		if((searchType == null || keyword == null || keyword.trim().isEmpty()) 
-		&& (sortField == null || sortField.trim().isEmpty() || "default".equals(sortField)))
-		{
-			boardList = boardService.getList();
-		}
+	// 	//4.검색, 정렬 아무것도 하지 않는 경우
+	// 	if((searchType == null || keyword == null || keyword.trim().isEmpty()) 
+	// 	&& (sortField == null || sortField.trim().isEmpty() || "default".equals(sortField)))
+	// 	{
+	// 		boardList = boardService.getList();
+	// 	}
 			
-		totalCount = boardList.size();
-		int startIndex = (page - 1) * pageSize;
-		int endIndex = Math.min(startIndex + pageSize, boardList.size());
-		boardList = boardList.subList(startIndex, endIndex);
+	// 	totalCount = boardList.size();
+	// 	int startIndex = (page - 1) * pageSize;
+	// 	int endIndex = Math.min(startIndex + pageSize, boardList.size());
+	// 	boardList = boardList.subList(startIndex, endIndex);
 
-    	int totalPage = (int) Math.ceil((double) totalCount / pageSize);
-		logger.info("totalPage : "+ totalPage);
-    	model.addAttribute("boardList", boardList);
-    	model.addAttribute("currentBoardPage", page);
-    	model.addAttribute("totalBoardPage", totalPage);
-    	model.addAttribute("searchType", searchType);
-    	model.addAttribute("keyword", keyword);
+    // 	int totalPage = (int) Math.ceil((double) totalCount / pageSize);
+	// 	logger.info("totalPage : "+ totalPage);
+    // 	model.addAttribute("boardList", boardList);
+    // 	model.addAttribute("currentBoardPage", page);
+    // 	model.addAttribute("totalBoardPage", totalPage);
+    // 	model.addAttribute("searchType", searchType);
+    // 	model.addAttribute("keyword", keyword);
 
-    	return "boardList/index";
-	}
+    // 	return "boardList/index";
+	// }
 
 	// @GetMapping("/")
 	// public String noticeList(@RequestParam(defaultValue = "1") int page, 
@@ -187,54 +187,54 @@ public class PageController {
 	}
 	
 	
-	@GetMapping("/board-add-page")
-	public String boardAddPage(Model model, Authentication authentication, RedirectAttributes redirectAttributes)
-	{
-		if(authentication == null || !authentication.isAuthenticated())
-		{
-			redirectAttributes.addFlashAttribute("result", "먼저 로그인을 진행해주세요");
-        	return "redirect:/board-list-page";
-		}
+	// @GetMapping("/board-add-page")
+	// public String boardAddPage(Model model, Authentication authentication, RedirectAttributes redirectAttributes)
+	// {
+	// 	if(authentication == null || !authentication.isAuthenticated())
+	// 	{
+	// 		redirectAttributes.addFlashAttribute("result", "먼저 로그인을 진행해주세요");
+    //     	return "redirect:/board-list-page";
+	// 	}
 
-		String writer = userService.findWriter(authentication.getName());
+	// 	String writer = userService.findWriter(authentication.getName());
 
-		if(writer == null)
-		{
-			redirectAttributes.addFlashAttribute("result", "유저 정보를 불러올 수 없습니다");
-        	return "redirect:/board-list-page";
-		}
+	// 	if(writer == null)
+	// 	{
+	// 		redirectAttributes.addFlashAttribute("result", "유저 정보를 불러올 수 없습니다");
+    //     	return "redirect:/board-list-page";
+	// 	}
 
-		model.addAttribute("writer", writer);
-		LocalDateTime now = LocalDateTime.now();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    	String formattedNow = now.format(formatter);
-		model.addAttribute("today", formattedNow);
-		return "boardAdd/index";
-	}	
+	// 	model.addAttribute("writer", writer);
+	// 	LocalDateTime now = LocalDateTime.now();
+	// 	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    // 	String formattedNow = now.format(formatter);
+	// 	model.addAttribute("today", formattedNow);
+	// 	return "boardAdd/index";
+	// }	
 	
-	@GetMapping("/board-check-page")
-	public String boardCheckPage(@RequestParam("idx") int idx, Model model, Authentication authentication, RedirectAttributes redirectAttributes) {
-		Board board = boardService.findBoard(idx);
-		model.addAttribute("board", board);
-		int queryCount = boardService.plusBoardViewCount(idx);
-		if(queryCount == 0)
-		{
-			redirectAttributes.addFlashAttribute("result", "글 정보를 불러올 수 없습니다");
-        	return "redirect:/board-list-page";
-		}
+	// @GetMapping("/board-check-page")
+	// public String boardCheckPage(@RequestParam("idx") int idx, Model model, Authentication authentication, RedirectAttributes redirectAttributes) {
+	// 	Board board = boardService.findBoard(idx);
+	// 	model.addAttribute("board", board);
+	// 	int queryCount = boardService.plusBoardViewCount(idx);
+	// 	if(queryCount == 0)
+	// 	{
+	// 		redirectAttributes.addFlashAttribute("result", "글 정보를 불러올 수 없습니다");
+    //     	return "redirect:/board-list-page";
+	// 	}
 
-		List<Comment> comments = commentService.findComment(idx, BoardType.FREE);
+	// 	List<Comment> comments = commentService.findComment(idx, BoardType.FREE);
 
-		if(authentication != null)
-		{
-			String username = authentication.getName();
-        	User user = userService.findByUsername(username); 
-        	model.addAttribute("writer", user.getWriter());
-		}
+	// 	if(authentication != null)
+	// 	{
+	// 		String username = authentication.getName();
+    //     	User user = userService.findByUsername(username); 
+    //     	model.addAttribute("writer", user.getWriter());
+	// 	}
 		
-		model.addAttribute("comments", comments);
-		return "boardCheck/index";
-	}
+	// 	model.addAttribute("comments", comments);
+	// 	return "boardCheck/index";
+	// }
 	
 	@GetMapping("/board-modify-page")
 	public String boardModifyPage(@RequestParam("idx") int idx,Model model, RedirectAttributes redirectAttributes) {

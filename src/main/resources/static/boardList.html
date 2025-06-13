@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>자유게시판</title>
+  
+  <link rel="stylesheet" href="/css/boardList.css">
+  <link rel="stylesheet" href="/css/common/header.css" />
+  <link rel="stylesheet" href="/css/common/sidebar.css" />
+  <link rel="stylesheet" href="/css/common/footer.css" />
+</head>
+<body>
+
+  <!-- 조각 삽입용 영역 -->
+  <div id="header-area"></div>
+  <div id="sidebar-area"></div>
+
+  <div id="container">
+  <div id="boardAdmin">
+    <h2 id="boardAdminH2">자유게시판</h2>
+      <button type="button" id="create-button" style="display:none" onclick="location.href='/board-add-page'">작성</button>
+  </div>
+
+  <table border="1" style="width: 100%; text-align: center; margin-top: 10px;">
+    <thead>
+      <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>글쓴이</th>
+        <th>등록일</th>
+        <th>조회</th>
+        <th>댓글</th>
+      </tr>
+    </thead>
+    <tbody id="board-section"
+      
+    </tbody>
+  </table>
+
+<div id="searchBox">
+  <form id="search-form" method="get" style="display: flex; justify-content: center; align-items: center; margin-top: 20px; gap: 10px;">
+    <select name="searchType">
+      <option id="titleOption" value="title">제목</option>
+      <option id="contentOption" value="content">내용</option>
+      <option id="writerOption" value="writer">글쓴이</option>
+      <option id="title_contentOption" value="title_content">제목+내용</option>
+    </select>
+    <input type="text" id="search-box" name="keyword" placeholder="검색어를 입력하세요" />
+    <button type="submit">🔍</button>
+  </form>
+</div>
+
+  <div id="sort-options">
+    <form id="view-sort-form" method="get" >
+        <button type="submit" class="sort-btn">조회수 ▲</button>
+    </form>
+    <form id="comment-sort-form" method="get" >
+        <button type="submit" class="sort-btn">코멘트 ▲</button>
+    </form>
+    <form id="date-sort-form" method="get" >
+        <button type="submit" class="sort-btn">작성일 ▲</button>
+    </form>
+  </div>
+
+<div class="pagination">
+  
+</div>
+
+  <div id="footer-area"></div>
+
+  <!-- 조각 로더 -->
+  <script src="/js/layout-loader.js"></script>
+  <script src="/js/boardList.js"></script>
+</body>
+</html>

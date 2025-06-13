@@ -40,8 +40,87 @@ public class JSVoteController {
     
 	private final Logger logger = LoggerFactory.getLogger(PageController.class);
 
-    @PostMapping("/api/vote")
-    public Map<String, Object> voteUp(@RequestParam int idx,
+    @PostMapping("/api/board/vote")
+    public Map<String, Object> boardVote(@RequestParam int idx,
+                                      @RequestParam String voteType,
+                                      Authentication authentication) {
+        Map<String, Object> result = new HashMap<>();
+
+        if(authentication == null || !authentication.isAuthenticated())
+        {
+            result.put("error", "회원 전용 기능입니다");
+        	return result;
+        }
+        
+        if(idx == 0)
+        {
+            result.put("error", "글 정보가 올바르지 않습니다");
+        	return result;
+        }
+
+        int userIdx = userService.findByUsername(authentication.getName()).getIdx();
+
+        if(userIdx == 0)
+        {
+            result.put("error", "유저 정보가 올바르지 않습니다");
+        	return result;
+        }
+
+        int voteCount = boardVoteService.findBoardVoteCount(userIdx, idx);
+
+        if(voteCount != 0)
+        {
+            result.put("error", "이미 좋아요나 싫어요를 누른 글입니다");
+        	return result;
+        }
+
+        if("up".equals(voteType))
+        {
+            int queryCount = boardService.plusBoardUpCount(idx);
+            if(queryCount == 0)
+            {
+                result.put("error", "좋아요에 실패했습니다");
+        	    return result;
+            }
+            else
+            {
+                BoardVote boardVote = new BoardVote();
+                boardVote.setUserIdx(userIdx);
+                boardVote.setBoardIdx(idx);
+                boardVote.setVoteType("up");
+                boardVoteService.insertBoardVote(boardVote);
+                result.put("success", "좋아요에 성공했습니다");
+        	    return result;
+            }
+        }
+        else if("down".equals(voteType))
+        {
+            int queryCount = boardService.plusBoardDownCount(idx);
+            if(queryCount == 0)
+            {
+                result.put("error", "싫어요에 실패했습니다");
+        	    return result;
+            }
+            else
+            {
+                BoardVote boardVote = new BoardVote();
+                boardVote.setUserIdx(userIdx);
+                boardVote.setBoardIdx(idx);
+                boardVote.setVoteType("down");
+                boardVoteService.insertBoardVote(boardVote);
+                result.put("success", "싫어요에 성공했습니다");
+                return result;
+            }
+        }
+        else
+        {
+                result.put("error", "예상치못한 에러가 발생했습니다");
+        	    return result;
+        }
+    }
+
+    @PostMapping("/api/notice/vote")
+    public Map<String, Object> noticeVote(@RequestParam int idx,
                                       @RequestParam String voteType,
                                       Authentication authentication) {
         Map<String, Object> result = new HashMap<>();

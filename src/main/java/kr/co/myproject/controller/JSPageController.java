@@ -45,5 +45,20 @@ public class JSPageController {
 	public String noticeAddPage() {
 		return "noticeAdd.html";
 	}
+
+	@GetMapping("/board-list-page")
+	public String boardListPage() {
+		return "boardList.html";
+	}
+	
+	@GetMapping("/board-add-page")
+	public String boardAddPage() {
+		return "boardAdd.html";
+	}
+	
+	@GetMapping("/board-check-page")
+	public String boardCheckPage(@RequestParam int idx) {
+		return "boardCheck.html?idx=" + idx;
+	}
 	
 }

@@ -118,10 +118,8 @@ if (noticeCheckIdx) {
   //코멘트 삭제
 for (let i = 0; i < forms.length; i++) {
   const form = forms[i];
-  console.log("반복문 시작");
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-    console.log("이벤트 발견");
     const formData = new FormData(e.target);
     const commentIdx = formData.get("commentIdx");
     console.log(commentIdx);
@@ -142,7 +140,6 @@ for (let i = 0; i < forms.length; i++) {
       }
     });
   });
-  console.log("폼 바인딩 완료", form);
 }
 
     });
@@ -156,7 +153,7 @@ document.getElementById("vote-up-form").addEventListener("submit", function(e){
     e.preventDefault();
     console.log("noticeCheckIdx : " + noticeCheckIdx);
 
-    fetch(`/api/vote`,
+    fetch(`/api/notice/vote`,
       {
         method : "POST",
         headers : {
@@ -195,7 +192,7 @@ document.getElementById("vote-up-form").addEventListener("submit", function(e){
 document.getElementById("vote-down-form").addEventListener("submit", function(e){
     e.preventDefault();
 
-    fetch(`/api/vote?idx=${noticeCheckIdx}&voteType=down`,
+    fetch(`/api/notice/vote?idx=${noticeCheckIdx}&voteType=down`,
       {
         method : "POST",
         headers : {
@@ -236,9 +233,6 @@ document.getElementById("comment-submit").addEventListener("submit", function(e)
       boardType: "NOTICE",
     };
 
-    console.log(comment.parentIdx);
-    console.log(comment.content);
-    console.log(comment.boardType);
 
     fetch("/api/comment/create",
       {

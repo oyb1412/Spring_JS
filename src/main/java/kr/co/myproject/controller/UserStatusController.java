@@ -47,10 +47,13 @@ public class UserStatusController {
         Boolean isAuthenticated = (Boolean) session.getAttribute("isAuthenticated");
         String username = (String) session.getAttribute("username");
         Boolean isAdmin = (Boolean) session.getAttribute("ADMIN");
+        Boolean isManager = (Boolean) session.getAttribute("MANAGER");
 
         result.put("isAuthenticated", isAuthenticated != null && isAuthenticated);
         result.put("username", username != null ? username : "");
         result.put("admin", isAdmin != null && isAdmin);
+        result.put("manager", isManager != null && isManager);
+
 
         return result;
     }

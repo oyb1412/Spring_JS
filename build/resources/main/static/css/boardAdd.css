@@ -1,0 +1,114 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Malgun Gothic', sans-serif;
+  background-color: #f0f2f5;
+}
+
+#container {
+  margin-left: 550px; /* ← sidebar 공간 고려! */
+  max-width: 800px;
+  padding: 20px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+
+#boardAdmin {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+}
+
+#boardAdminH2 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  color: white;
+  border-bottom: 2px solid white;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+label {
+  font-size: 16px;
+  color: white;
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: white;
+  color: black;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+  border-color: gray;
+  outline: none;
+  background-color: #fff;
+}
+
+#buttonSubmit {
+  width: 100%;
+  padding: 15px;
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+#buttonSubmit:hover {
+  background-color: gray;
+  color: white;
+}
+
+.note-editable {
+  background-color: white !important;
+  color: black !important; 
+}
+
+.editor-tabs {
+  margin: 10px 0;
+}
+
+.tab-button {
+  background-color: #f6f8fa;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #555;
+}
+
+.tab-button.active {
+  background-color: white;
+  border-top: 2px solid #0366d6;
+  color: black;
+}
+
+#editor-wrap,
+#preview-area {
+  border: 1px solid #ccc;
+  padding: 15px;
+  min-height: 300px;
+  background-color: #fff;
+  color: black;
+}
