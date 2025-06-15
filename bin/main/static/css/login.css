@@ -1,0 +1,78 @@
+/* css/login/style.css */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Malgun Gothic', sans-serif;
+  background-color: #f0f2f5;
+}
+
+/* 전체 레이아웃 */
+#main-content {
+  margin-left: 800px; /* ← 사이드바 공간 확보 */
+  padding: 40px 20px;
+}
+
+#login-container {
+  background-color: #f9f9f9;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.input-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#login-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #222;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#login-button:hover {
+  background-color: #444;
+}
+
+#register-link {
+  margin-top: 15px;
+}
+
+#register-link a {
+  color: #555;
+  text-decoration: none;
+  font-size: 14px;
+}

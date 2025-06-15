@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>메인 페이지</title>
+  
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="/css/common/header.css" />
+  <link rel="stylesheet" href="/css/common/sidebar.css" />
+  <link rel="stylesheet" href="/css/common/footer.css" />
+</head>
+<body>
+
+  <!-- 조각 삽입용 영역 -->
+  <div id="header-area"></div>
+  <div id="sidebar-area"></div>
+
+  <!-- 본문 -->
+  <main id="main-content" style="padding: 20px;">
+    <div id="container">
+      <div id="noticeAdmin">
+        <h2 id="noticeAdminH2">공지사항</h2>
+          <button id="createButton" style="display:none;" onclick="location.href='/notice-add-page'">작성</button>
+      </div>
+
+  <table border="1" style="width: 100%; text-align: center; margin-top: 10px;">
+    <thead>
+      <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>글쓴이</th>
+        <th>등록일</th>
+        <th>조회</th>
+        <th>댓글</th>
+      </tr>
+    </thead>
+    <tbody id="notice-table-body"></tbody>
+  </table>
+
+  <div id="searchBox">
+    <form id="search-form" method="get" style="display: flex; justify-content: center; align-items: center; margin-top: 20px; gap: 10px;">
+      <select name="searchType">
+        <option value="title">제목</option>
+        <option value="content">내용</option>
+        <option value="writer">글쓴이</option>
+        <option value="title_content" >제목+내용</option>
+      </select>
+     <input type="text" name="keyword" placeholder="검색어를 입력하세요" />
+      <button type="submit">🔍</button>
+    </form>
+  </div>
+
+  <div class="pagination">
+  </div>
+
+</div>
+</main>
+
+  <div id="footer-area"></div>
+
+  <!-- 조각 로더 -->
+  <script src="/js/layout-loader.js"></script>
+  <script src="/js/index.js"></script>
+</body>
+</html>

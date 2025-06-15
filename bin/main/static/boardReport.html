@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>신고하기</title>
+  
+  <link rel="stylesheet" href="/css/boardReport.css">
+</head>
+<body>
+
+
+  <div id="report-container">
+  <h2>🚨 신고하기</h2>
+
+  <div class="report-row">
+    <label>제목</label>
+    <span class="report-value" id="title"></span>
+  </div>
+
+  <div class="report-row">
+    <label>작성자</label>
+    <span class="report-value" id="writer"></span>
+  </div>
+
+  <div class="report-row">
+    <label>신고자</label>
+    <span class="report-value" id="repoter"></span>
+  </div>
+
+  <form id="report-form" method="post">
+    <div class="report-row">
+      <label>신고사유</label>
+      <div class="report-options">
+        <label><input type="radio" name="reportType" value="INSULT" required> 욕설</label>
+        <label><input type="radio" name="reportType" value="PORN"> 음란성</label>
+        <label><input type="radio" name="reportType" value="VIOLATION"> 정책 위반</label>
+        <label><input type="radio" name="reportType" value="DEFAMATION"> 비방</label>
+      </div>
+    </div>
+
+    <div class="report-row">
+      <label>신고 내용</label>
+      <textarea name="reportContent" rows="4" id="content" placeholder="신고 내용을 작성해주세요." required></textarea>
+    </div>
+
+    <div class="report-actions">
+      <button type="submit" class="btn confirm">신고하기</button>
+      <button type="button" class="btn cancel" onclick="if(confirm(`정말 닫으시겠습니까?`)) window.close()">닫기</button>
+    </div>
+  </form>
+</div>
+
+
+  <script src="/js/boardReport.js"></script>
+</body>
+</html>

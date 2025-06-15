@@ -2,6 +2,8 @@ package kr.co.myproject.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.servlet.http.HttpServletRequest;
+import kr.co.myproject.Util.Util;
 import kr.co.myproject.entity.BoardType;
 import kr.co.myproject.entity.Comment;
 import kr.co.myproject.entity.Notice;
@@ -45,9 +47,9 @@ public class JSNoticeController {
 	private final Logger logger = LoggerFactory.getLogger(JSNoticeController.class);
 
     @GetMapping("/api/notice/list")
-    public Map<String, Object> getNoticeList(@RequestParam(defaultValue = "1") int page,
-                                             @RequestParam(required = false) String searchType,
-                                             @RequestParam(required = false) String keyword) {
+    public Map<String, Object> getNoticeList(@RequestParam(name="page", defaultValue = "1") int page,
+                                             @RequestParam(name="searchType", required = false) String searchType,
+                                             @RequestParam(name="keyword", required = false) String keyword) {
 
         Map<String, Object> result = new HashMap<>();
         List<Notice> noticeList = new ArrayList<>();
@@ -80,8 +82,9 @@ public class JSNoticeController {
     }
 
     @GetMapping("/api/notice/check")
-    public ResponseEntity<Map<String, Object>> getNoticeCheck(@RequestParam int idx, 
-                                                               Authentication authentication) {
+    public ResponseEntity<Map<String, Object>> getNoticeCheck(@RequestParam("idx") int idx, 
+                                                               Authentication authentication,
+                                                               HttpServletRequest httpServletRequest) {
         Map<String, Object> result = new HashMap<>();
         Notice notice = noticeService.findNotice(idx);
 
@@ -101,7 +104,6 @@ public class JSNoticeController {
         List<Comment> comment = commentService.findComment(idx, BoardType.NOTICE);
 
         result.put("commentList", comment);
-
         return ResponseEntity.ok(result);
     }
 
@@ -166,7 +168,7 @@ public class JSNoticeController {
     }
 
     @DeleteMapping("/api/notice/delete")
-    public Map<String, Object> noticeDelete(@RequestParam int idx)
+    public Map<String, Object> noticeDelete(@RequestParam("idx") int idx)
     {
         Map<String, Object> result = new HashMap<>();
         Notice notice = noticeService.findNotice(idx);

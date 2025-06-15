@@ -1,0 +1,103 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Malgun Gothic', sans-serif;
+  background-color: #f0f2f5;
+}
+
+#container {
+  margin-left: 550px; /* ← 사이드바 공간 확보 */
+  max-width: 800px;
+  padding: 20px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+}
+
+#boardAdmin {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+}
+
+#boardAdminH2 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  border-bottom: 2px solid white;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+label {
+  font-size: 16px;
+  color: white;
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  background-color: white;
+  color: black;
+}
+
+input:read-only {
+  background-color: #f0f0f0;
+}
+
+textarea {
+  resize: vertical;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+  border-color: #007bff;
+  outline: none;
+  background-color: #fff;
+}
+
+#buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn.update {
+  background-color: orange;
+  color: white;
+}
+
+.btn.cancel {
+  background-color: #999;
+  color: white;
+}
+
+.btn:hover {
+  opacity: 0.85;
+}
+
+.note-editable {
+  background-color: white !important;
+  color: black !important;
+}

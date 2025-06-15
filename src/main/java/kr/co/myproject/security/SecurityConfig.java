@@ -19,6 +19,7 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.firewall.HttpFirewall;
 import org.springframework.security.web.firewall.StrictHttpFirewall;
+import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -31,7 +32,7 @@ import kr.co.myproject.Util.Util;
 
 @Configuration
 @EnableWebSecurity
-public class SecutiryConfig {
+public class SecurityConfig {
 	 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
@@ -45,7 +46,7 @@ public class SecutiryConfig {
 				 "/api/comment/create/**", "/api/notice/add/**", "/api/notice/modify/**", "/api/user/findPassword/**", "/api/userdata/modify/**", "/api/user/data/**", "/api/admin/ban/**").permitAll()
 				 .requestMatchers("/api/user/status","/api/csrf-token","/views/common/header.html", "/views/common/sidebar.html", "/views/common/footer.html","/api/board/report/**").permitAll()
 				 .requestMatchers("/WEB-INF/views/**").denyAll()
-				 .requestMatchers("/", "/login-page", "/register-page", "/board-check-page/**", "/board-list-page","/login", "/register").permitAll()
+				 .requestMatchers("/", "/login-page", "/register-page", "/board-check-page/**", "/board-list-page","/login", "/register", "noticeCheck.html").permitAll()
 				 .requestMatchers("/logout").hasAnyAuthority("ADMIN","MANAGER","MEMBER")
 				 .requestMatchers("/notice-check-page/**").hasAnyAuthority("ADMIN","MANAGER","MEMBER")
 				 .requestMatchers("/notice-add-page", "/notice-modify-page/**", "/notice-add" , "/notice-delete", "/notice-modify").hasAnyAuthority("ADMIN","MANAGER")
@@ -116,10 +117,8 @@ public class SecutiryConfig {
 				
 				session.setAttribute("username", authentication.getName());
 				session.setAttribute("isAuthenticated", true);
-				
-				response.sendRedirect(request.getContextPath() + Util.GetFinalURL(request));
 
-				
+				response.sendRedirect(request.getContextPath() + Util.GetFinalURL(request));
 				super.onAuthenticationSuccess(request, response, authentication);
 			}
 		};

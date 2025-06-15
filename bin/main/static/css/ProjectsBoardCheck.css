@@ -1,0 +1,148 @@
+/* 초기화 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Malgun Gothic', sans-serif;
+  background-color: #f0f2f5;
+}
+
+/* 메인 컨테이너 */
+#container {
+  margin-left: 550px;
+  max-width: 800px;
+  padding: 20px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+/* 본문 카드 */
+#boardAdmin {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
+}
+
+#boardAdminH2 {
+  font-size: 26px;
+  margin-bottom: 20px;
+  text-align: center;
+  border-bottom: 2px solid white;
+  padding-bottom: 10px;
+}
+
+/* 라벨 */
+label {
+  display: block;
+  margin: 15px 0 5px;
+  font-weight: bold;
+  color: white;
+}
+
+/* 입력창 + 텍스트박스 */
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.9);
+  font-size: 15px;
+  color: black;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* 버튼 정렬 */
+#buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+/* 공통 버튼 */
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* 수정/삭제 */
+.btn.update {
+  background-color: orange;
+  color: white;
+}
+
+.btn.delete {
+  background-color: red;
+  color: white;
+}
+
+.btn:hover {
+  opacity: 0.85;
+}
+
+/* 댓글 영역 */
+#comment-section {
+  margin-top: 40px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* 댓글 한 줄 */
+.comment-box {
+  margin-bottom: 15px;
+  padding: 10px;
+  background: #f5f5f5;
+  border-radius: 5px;
+}
+
+.comment-date {
+  color: gray;
+  font-size: 0.9em;
+}
+
+.comment-box p {
+  background: white;
+  color: black;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 3px;
+}
+
+/* 댓글 입력창 */
+textarea[name="content"] {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+/* 댓글 등록 버튼 */
+.comment-submit {
+  text-align: right;
+  margin-top: 8px;
+}
+
+.comment-warning {
+  font-size: 0.85em;
+  color: gray;
+  margin-top: 15px;
+}
+
+button:disabled {
+	background-color: #ccc;
+	color: #666;
+	cursor: not-allowed;
+}
+

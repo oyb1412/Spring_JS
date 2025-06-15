@@ -1,0 +1,106 @@
+/* 전체 사이드바 박스 */
+#sidebar {
+  position: fixed;
+  top: 60px; /* header height 만큼 띄움 */
+  left: 0;
+  width: 200px;
+  height: calc(100vh - 60px); /* 화면 전체 높이 - header */
+  background-color: #f4f4f4;
+  padding: 20px;
+  border-right: 1px solid #ccc;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  box-sizing: border-box;
+  z-index: 99;
+}
+
+/* 로그인/회원가입 영역 */
+.sidebar-login {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.sidebar-login p {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.sidebar-login a {
+  display: block;
+  color: #333;
+  text-decoration: none;
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.sidebar-login a:hover {
+  color: #000;
+  font-weight: bold;
+}
+
+/* 메뉴 영역 */
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar-menu a {
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.sidebar-menu a:hover {
+  background-color: #ddd;
+  font-weight: bold;
+}
+
+.sidebar-btn {
+  display: block;
+  margin: 10px auto;
+  padding: 8px 16px;
+  width: 80%;
+  text-align: center;
+  border: none;
+  border-radius: 20px;
+  background-color: #333;
+  color: white;
+  font-size: 14px;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.sidebar-btn:hover {
+  background-color: #555;
+}
+
+#menu-box a {
+  display: block;
+  margin: 8px auto;
+  padding: 6px 12px;
+  width: 80%;
+  text-align: center;
+  background-color: transparent;
+  color: black;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: background-color 0.2s ease;
+}
+
+#menu-box a:hover {
+  background-color: #e0e0e0;
+}
+
+#menu-box a.resume,
+#menu-box a.projects {
+  margin-left: 15px;
+  background-color: #ffcc00;
+  color: black;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 5px;
+  display: inline-block;
+}

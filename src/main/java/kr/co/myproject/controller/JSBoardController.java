@@ -12,12 +12,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.co.myproject.entity.Board;
 import kr.co.myproject.entity.BoardReport;
@@ -197,7 +195,7 @@ public class JSBoardController {
 	}
 
     @DeleteMapping("/api/board/delete")
-    public Map<String, Object> boardDelete(@RequestParam int idx) {
+    public Map<String, Object> boardDelete(@RequestParam("idx") int idx) {
         Map<String, Object> result = new HashMap<>();
 
         if(idx == 0)
@@ -220,7 +218,7 @@ public class JSBoardController {
     }
 
     @GetMapping("/api/board/check")
-    public Map<String, Object> boardCheck(@RequestParam int idx,
+    public Map<String, Object> boardCheck(@RequestParam("idx") int idx,
                                            Authentication authentication) {
 
         
@@ -290,7 +288,7 @@ public class JSBoardController {
     }
     
     @GetMapping("/api/board/report/data")
-    public Map<String, Object> boardReportData(@RequestParam int idx, 
+    public Map<String, Object> boardReportData(@RequestParam("idx") int idx, 
                                                 Authentication authentication) {
         Map<String, Object> result = new HashMap<>();
         
@@ -396,7 +394,7 @@ public class JSBoardController {
     }
 
     @GetMapping("/api/project/check")
-    public Map<String, Object> getMethodName(@RequestParam int idx) {
+    public Map<String, Object> projectCheck(@RequestParam("idx") int idx) {
         Map<String, Object> result = new HashMap<>();
 
         Projects project = projectsService.SelectProjectsByIdx(idx);

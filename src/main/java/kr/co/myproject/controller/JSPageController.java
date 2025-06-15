@@ -31,7 +31,7 @@ public class JSPageController {
 	}
 
 	@GetMapping("/notice-check-page")
-	public String noticeCheckPage(@RequestParam int idx,
+	public String noticeCheckPage(@RequestParam("idx") int idx,
 								   HttpServletRequest httpServletRequest) {
 		int queryCount = noticeService.plusNoticeViewCount(idx);
 
@@ -45,7 +45,7 @@ public class JSPageController {
 	}
 
 	@GetMapping("/notice-modify-page")
-	public String noticeModifyPage(@RequestParam int idx) {
+	public String noticeModifyPage(@RequestParam("idx") int idx) {
 		return "noticeModify.html?idx=" + idx;
 	}
 
@@ -65,18 +65,18 @@ public class JSPageController {
 	}
 	
 	@GetMapping("/board-check-page")
-	public String boardCheckPage(@RequestParam int idx) {
+	public String boardCheckPage(@RequestParam("idx") int idx) {
 		return "boardCheck.html?idx=" + idx;
 	}
 
 	@GetMapping("/board-modify-page")
-	public String getMethodName(@RequestParam int idx) {
+	public String boardModify(@RequestParam("idx") int idx) {
 		return "boardModify.html?idx=" + idx;
 	}
 	
 	@GetMapping("/board-report-page")
-	public String reportPage(@RequestParam int idx) {
-		return "boardReport.html?=idx" + idx;
+	public String reportPage(@RequestParam("idx") int idx) {
+		return "boardReport.html?idx=" + idx;
 	}
 
 	@GetMapping("/resume-board-check-page")
@@ -90,8 +90,8 @@ public class JSPageController {
 	}
 	
 	@GetMapping("/projects-check-page")
-	public String projectCheck(@RequestParam int idx) {
-		return "ProjectsBoardCheck.html?=idx" + idx;
+	public String projectCheck(@RequestParam("idx") int idx) {
+		return "ProjectsBoardCheck.html?idx=" + idx;
 	}
 	
 

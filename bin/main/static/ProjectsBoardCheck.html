@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>로그인</title>
+  
+  <link rel="stylesheet" href="/css/ProjectsBoardCheck.css">
+  <link rel="stylesheet" href="/css/common/header.css" />
+  <link rel="stylesheet" href="/css/common/sidebar.css" />
+  <link rel="stylesheet" href="/css/common/footer.css" />
+</head>
+<body>
+
+  <!-- 조각 삽입용 영역 -->
+  <div id="header-area"></div>
+  <div id="sidebar-area"></div>
+
+  <div id="container">
+	<div id="boardAdmin">
+		<h2 id="boardAdminH2">프로젝트</h2>
+
+		<label for="title">제목</label>
+		<input type="text" id="title" name="title"  readonly>
+
+        <label for="indate">소요기간</label>
+		<input type="text" id="indate" name="indate"  readonly>
+
+		<label for="introduce">소개</label>
+		<input type="text" id="introduce" name="introduce" readonly>
+
+		<label for="content">내용</label>
+		<div id="content" 
+     		style="border:1px solid #ccc; padding:10px; min-height:100px; background-color:white; color:black">
+		</div>
+</div>
+
+  <div id="footer-area"></div>
+
+  <!-- 조각 로더 -->
+  <script src="/js/layout-loader.js"></script>
+  <script src="/js/ProjectsBoardCheck.js"></script>
+</body>
+</html>

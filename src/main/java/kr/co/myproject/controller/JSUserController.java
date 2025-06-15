@@ -151,7 +151,7 @@ public class JSUserController {
     }
 
 	@GetMapping("/api/user/data")
-	public Map<String, Object> getMethodName(Authentication authentication) {
+	public Map<String, Object> userData(Authentication authentication) {
 		Map<String, Object> result = new HashMap<>();
 
 		if(authentication != null && authentication.isAuthenticated())
