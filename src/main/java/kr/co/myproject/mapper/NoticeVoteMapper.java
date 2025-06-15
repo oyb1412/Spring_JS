@@ -2,6 +2,7 @@ package kr.co.myproject.mapper;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import kr.co.myproject.entity.NoticeVote;
@@ -12,5 +13,5 @@ public interface NoticeVoteMapper {
 	public int noticeVoteInsert(NoticeVote notice);
 
     @Select("SELECT COUNT(*) FROM springboot_project_study.noticevote WHERE userIdx=#{userIdx} and noticeIdx=#{noticeIdx}")
-	public int findNoticeVoteCount(int userIdx, int noticeIdx);
+	public int findNoticeVoteCount(@Param("userIdx") int userIdx, @Param("noticeIdx") int noticeIdx);
 }

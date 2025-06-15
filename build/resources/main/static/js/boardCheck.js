@@ -3,6 +3,8 @@ const indexUrlParams = new URLSearchParams(window.location.search);
 //URL파라미터에서 page값 가져옴. 없다면 1
 let currentPage = parseInt(indexUrlParams.get("idx")) || 1;
 
+console.log(currentPage);
+
 let userIdx;
 let boardUserName;
 let boardWriter;
@@ -99,7 +101,7 @@ fetch(`/api/board/check?idx=${currentPage}`)
     const commentIdx = formData.get("commentIdx");
     console.log(commentIdx);
 
-    fetch(`/api/comment/delete?idx=${commentIdx}`, {
+    fetch(`/api/comment/delete?idx=${commentIdx}&parentIdx=${currentPage}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -126,7 +128,7 @@ fetch(`/api/board/check?idx=${currentPage}`)
 
 //너무 길어서 나눠서
 //로그인 상태 체크 후 댓글 작성 가능/불가능 
-fetch("api/user/status")
+fetch("/api/user/status")
     .then(ref => ref.json())
     .then(data => {
         const loginComment = document.getElementById("login-comment");
@@ -145,10 +147,10 @@ fetch("api/user/status")
 
                 const content = loginComment.value;
 
-                const comment = {
+      const comment = {
       parentIdx: currentPage,
       content: content,
-      boardType: "BOARD",
+      boardType: "FREE",
     };
 
 
@@ -190,7 +192,7 @@ fetch("api/user/status")
 //로그인 정보 불러오기
 //메니저/어드민/글 작성자만 수정/삭제 버튼 렌더링
 //로그인 한 상태에서만 신고 버튼 렌더링
-fetch("api/user")
+fetch("/api/user")
     .then(ref => ref.json())
     .then(data =>
     {
@@ -199,36 +201,30 @@ fetch("api/user")
         {
             userIdx = data.user.idx;
             reportBtn.style.display = "inline-block";
+            const buttonContainer = document.getElementById("buttonContainer");
+            buttonContainer.style.display = "none";
 
-            let canModify = false;
 
             //로그인한 유저네임 - board.memID 체크
             if(data.user.username == boardUserName)
             {
-                canModify = true;
+                buttonContainer.style.display = "inline-block";
+
             }
             //로그인한 유저 권한 체크
             fetch("api/user/status")
                 .then(ref => ref.json())
                 .then(data => {
-                    if(data.manager || data.admin)
+                    console.log(data.admin);
+                    console.log(data.manager);
+
+                    if(data.admin || data.manager)
                     {
-                        canModify = true;
+                        buttonContainer.style.display = "inline-block";
                     }
                 })
 
-            const buttonContainer = document.getElementById("buttonContainer");
-            
-            //수정 가능한 대상이면 버튼 렌더링
-            if(canModify)
-            {
-                buttonContainer.display = "inline-block";
-            }
-            //수정 불가능한 대상이면 버튼 비 렌더링
-            else
-            {
-                buttonContainer.display = "none";
-            }
+           
         }
         else
         {
@@ -242,14 +238,14 @@ fetch("api/user")
 document.getElementById("modify-form").addEventListener("submit", function(e){
     e.preventDefault();
 
-    location.href = `/board-modify-page&idx=${currentPage}`;
+    location.href = `/board-modify-page?idx=${currentPage}`;
 })
 
 //삭제 버튼 이벤트 할당
 document.getElementById("delete-form").addEventListener("submit", function(e){
     e.preventDefault();
 
-    fetch(`api/board/delete&idx=${currentPage}`,{
+    fetch(`/api/board/delete?idx=${currentPage}`,{
         method : "DELETE",
         headers : {
             [csrfHeader] : csrfToken
@@ -274,10 +270,7 @@ document.getElementById("delete-form").addEventListener("submit", function(e){
 document.getElementById("report-form").addEventListener("submit", function(e){
     e.preventDefault();
 
-    const url = '/board-report-page?boardIdx=' + encodeURIComponent(currentPage)
-              + '&reportedUserIdx=' + encodeURIComponent(userIdx)
-              + '&writer=' + encodeURIComponent(boardWriter)
-              + '&title=' + encodeURIComponent(boardTitle);
+    const url = '/board-report-page?idx=' + encodeURIComponent(currentPage);
 
     window.open(url, 'reportWindow', 'width=500,height=400,resizable=no');
 })
@@ -290,7 +283,7 @@ document.getElementById("report-form").addEventListener("submit", function(e){
 document.getElementById("vote-up-form").addEventListener("submit", function(e){
     e.preventDefault();
 
-    fetch(`api/board/vote&idx=${currentPage}&voteType=up`,{
+    fetch(`/api/board/vote?idx=${currentPage}&voteType=up`,{
         method : "POST",
         headers : {
             [window.csrfHeader] : window.csrfToken
@@ -313,7 +306,7 @@ document.getElementById("vote-up-form").addEventListener("submit", function(e){
 document.getElementById("vote-down-form").addEventListener("submit", function(e){
     e.preventDefault();
 
-    fetch(`api/board/vote&idx=${currentPage}&voteType=down`,{
+    fetch(`/api/board/vote?idx=${currentPage}&voteType=down`,{
         method : "POST",
         headers : {
             [window.csrfHeader] : window.csrfToken

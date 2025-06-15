@@ -143,6 +143,8 @@ document.getElementById("date-sort-form").addEventListener("submit", function(e)
 const paginationSection = document.querySelector(".pagination");
 paginationSection.innerHTML = "";
 
+Pagination();
+
 function Pagination()
 {
     paginationSection.innerHTML = "";
@@ -161,7 +163,9 @@ if(currentPage > 1)
              boardSection.innerHTML = "";
              boardList.forEach(board => {
              RenderingList(board);
+
         });
+        Pagination();
     })
     }
     
@@ -192,7 +196,10 @@ fetch(`/api/board/list?idx=${currentPage}&searchType=${searchType}&keyword=${key
                        boardSection.innerHTML = "";
                        boardList.forEach(board => {
                        RenderingList(board);
+
         });
+        Pagination();
+
     })
     }
     paginationSection.appendChild(button);
@@ -208,13 +215,14 @@ fetch(`/api/board/list?idx=${currentPage}&searchType=${searchType}&keyword=${key
             .then(ref => ref.json())
             .then(data => {
              const boardList = data.boardList;
-             console.log(currentPage);
-             console.log(boardList);
 
              boardSection.innerHTML = "";
              boardList.forEach(board => {
              RenderingList(board);
+
         });
+        Pagination();
+
     })
     }
     

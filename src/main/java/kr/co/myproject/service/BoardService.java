@@ -69,6 +69,17 @@ public class BoardService {
 		return boardMapper.plusBoardUpCount(idx);
 	}
 
+	public int plusBoardCommentCount(int idx)
+	{
+		return boardMapper.plusBoardCommentCount(idx);
+	}
+
+	public int downBoardCommentCount(int idx)
+	{
+		return boardMapper.downBoardCommentCount(idx);
+	}
+
+
 	public int plusBoardDownCount(int idx)
 	{
 		return boardMapper.plusBoardDownCount(idx);

@@ -40,7 +40,7 @@ document.getElementById("create-form").addEventListener("submit", function(e){
             else if(data.success)
             {
                 alert(data.success);
-                location.href = "board-check-page?idx=1"
+                location.href = "/board-list-page"
             }
         })
 })

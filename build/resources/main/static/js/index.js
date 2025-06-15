@@ -5,6 +5,7 @@ let currentPage = parseInt(indexUrlParams.get("page")) || 1;
 let searchType = indexUrlParams.get("searchType") || "";
 let keyword = indexUrlParams.get("keyword") || "";
 
+console.log(currentPage);
 //패치
 //유저가 어드민 or 매니저일때만
 //get으로 버튼 id가져와서 .style .display ="inline-block" <> "none"로 변경

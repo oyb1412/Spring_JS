@@ -38,12 +38,12 @@ public class JSVoteController {
     @Autowired
     private NoticeService noticeService;
     
-	private final Logger logger = LoggerFactory.getLogger(PageController.class);
+	private final Logger logger = LoggerFactory.getLogger(JSVoteController.class);
 
     @PostMapping("/api/board/vote")
-    public Map<String, Object> boardVote(@RequestParam int idx,
-                                      @RequestParam String voteType,
-                                      Authentication authentication) {
+    public Map<String, Object> boardVote(@RequestParam("idx") int idx,
+                                         @RequestParam("voteType") String voteType,
+                                          Authentication authentication) {
         Map<String, Object> result = new HashMap<>();
 
         if(authentication == null || !authentication.isAuthenticated())
@@ -120,9 +120,9 @@ public class JSVoteController {
     }
 
     @PostMapping("/api/notice/vote")
-    public Map<String, Object> noticeVote(@RequestParam int idx,
-                                      @RequestParam String voteType,
-                                      Authentication authentication) {
+    public Map<String, Object> noticeVote(@RequestParam("idx") int idx,
+                                          @RequestParam("voteType") String voteType,
+                                           Authentication authentication) {
         Map<String, Object> result = new HashMap<>();
 
         if(authentication == null || !authentication.isAuthenticated())

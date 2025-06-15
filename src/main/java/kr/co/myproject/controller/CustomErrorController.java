@@ -12,7 +12,8 @@ public class CustomErrorController implements ErrorController{
 	//404에러가 뜰때 특정 액션을 취할수 있게 해주는 인터페이스
 	
 	@GetMapping("/error")
-	public String handleError(HttpServletRequest request, RedirectAttributes redirectAttributes)
+	public String handleError(HttpServletRequest request, 
+                              RedirectAttributes redirectAttributes)
 	{
 		int statusCode = (int)request.getAttribute("jakarta.servlet.error.status_code");
 		

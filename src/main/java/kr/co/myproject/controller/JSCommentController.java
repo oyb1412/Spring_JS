@@ -5,6 +5,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kr.co.myproject.entity.Comment;
 import kr.co.myproject.entity.User;
+import kr.co.myproject.service.BoardService;
 import kr.co.myproject.service.CommentService;
 import kr.co.myproject.service.UserService;
 
@@ -28,9 +31,16 @@ public class JSCommentController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private BoardService boardService;
+
+    private final Logger logger = LoggerFactory.getLogger(JSCommentController.class);
+
     
     @DeleteMapping("/api/comment/delete")
-    public Map<String, Object> commentDelete(@RequestParam int idx)
+    public Map<String, Object> commentDelete(@RequestParam("idx") int idx,
+                                             @RequestParam("parentIdx") int parentIdx)
     {
         Map<String, Object> result = new HashMap<>();
 
@@ -40,12 +50,15 @@ public class JSCommentController {
             return result;
         }
 
+        boardService.downBoardCommentCount(parentIdx);
+
         result.put("success", "댓글 삭제에 성공했습니다");
         return result;
     }
 
     @PostMapping("/api/comment/create")
-    public Map<String, Object> putMethodName(@RequestBody Comment comment, Authentication authentication) {
+    public Map<String, Object> putMethodName(@RequestBody Comment comment,
+                                              Authentication authentication) {
          Map<String, Object> result = new HashMap<>();
 
         LocalDateTime now = LocalDateTime.now();
@@ -58,12 +71,14 @@ public class JSCommentController {
             User user = userService.findByUsername(authentication.getName());
             comment.setWriter(user.getWriter());
         }
-
         if(commentService.commentInsert(comment) == 0)
         {
             result.put("error", "코멘트 작성에 실패했습니다");
             return result;
         }
+
+        logger.info("idx" + comment.getParentIdx());
+        boardService.plusBoardCommentCount(comment.getParentIdx());
 
         result.put("success", "코멘트 작성에 성공했습니다");
         return result;

@@ -30,7 +30,7 @@ public interface BoardMapper {
 	public List<Board> getBoardListIndate();
 
 	@Select("SELECT idx, memID, title, content, writer, indate, viewCount, commentCount FROM springboot_project_study.board ORDER BY idx DESC LIMIT #{start}, #{pageSize}")
-	public List<Board> getPagedList(int start, int pageSize);
+	public List<Board> getPagedList(@Param("start") int start,@Param("pageSize") int pageSize);
 	
 	@Select("SELECT idx, memID, title, content, writer, indate, viewCount, commentCount, upCount, downCount, userIdx FROM springboot_project_study.board WHERE idx=#{idx}")
 	public Board findBoard(int idx);
@@ -43,6 +43,9 @@ public interface BoardMapper {
 
 	@Update("UPDATE springboot_project_study.board SET commentCount = commentCount + 1 WHERE idx=#{idx}")
 	public int plusBoardCommentCount(int idx);
+
+	@Update("UPDATE springboot_project_study.board SET commentCount = commentCount - 1 WHERE idx=#{idx}")
+	public int downBoardCommentCount(int idx);
 
 	@Update("UPDATE springboot_project_study.board SET upCount = upCount + 1 WHERE idx=#{idx}")
 	public int plusBoardUpCount(int idx);

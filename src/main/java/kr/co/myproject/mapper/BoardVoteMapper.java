@@ -2,6 +2,7 @@ package kr.co.myproject.mapper;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import kr.co.myproject.entity.BoardVote;
@@ -12,5 +13,5 @@ public interface BoardVoteMapper {
 	public int boardVoteInsert(BoardVote board);
 
     @Select("SELECT COUNT(*) FROM springboot_project_study.boardvote WHERE userIdx=#{userIdx} and boardIdx=#{boardIdx}")
-	public int findBoardVoteCount(int userIdx, int boardIdx);
+	public int findBoardVoteCount(@Param("userIdx") int userIdx, @Param("boardIdx") int boardIdx);
 }

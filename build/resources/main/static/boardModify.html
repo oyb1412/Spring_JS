@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>글 수정</title>
+  
+  <link rel="stylesheet" href="/css/boardModify.css">
+  <link rel="stylesheet" href="/css/common/header.css" />
+  <link rel="stylesheet" href="/css/common/sidebar.css" />
+  <link rel="stylesheet" href="/css/common/footer.css" />
+</head>
+<body>
+
+  <!-- 조각 삽입용 영역 -->
+  <div id="header-area"></div>
+  <div id="sidebar-area"></div>
+
+  <form id="modify-form" method="post">
+  <div id="container">
+    <div id="boardAdmin">
+      <h2 id="boardAdminH2">글 수정</h2>
+
+      <label for="title">제목</label>
+      <input type="text" id="title" name="title">
+
+      <label for="content">내용</label>
+      <textarea id="content" name="content" rows="5" maxlength="1000"></textarea>
+
+      <label for="writer">작성자</label>
+      <input type="text" id="writer" name="writer" readonly>
+
+      <label for="indate">작성일</label>
+      <input type="text" id="indate" name="indate" readonly>
+
+      <label for="viewCount">조회수</label>
+      <input type="text" id="viewCount" name="viewCount" readonly>
+
+      <button type="submit" class="btn update" onclick="return confirm('정말 수정하시겠습니까?')">확인</button>
+      <button type="button" class="btn cancel" onclick="if(confirm('정말 취소하시겠습니까?')) location.href='${pageContext.request.contextPath}/board-list'">취소</button>
+    </div>
+  </div>
+</form>
+
+
+  <div id="footer-area"></div>
+
+  <!-- 조각 로더 -->
+  <script src="/js/layout-loader.js"></script>
+  <script src="/js/boardModify.js"></script>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-lite.min.js"></script>
+</body>
+</html>

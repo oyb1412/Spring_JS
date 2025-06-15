@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>프로젝트</title>
+  
+  <link rel="stylesheet" href="/css/ProjectsBoardList.css">
+  <link rel="stylesheet" href="/css/common/header.css" />
+  <link rel="stylesheet" href="/css/common/sidebar.css" />
+  <link rel="stylesheet" href="/css/common/footer.css" />
+</head>
+<body>
+
+  <!-- 조각 삽입용 영역 -->
+  <div id="header-area"></div>
+  <div id="sidebar-area"></div>
+
+  <div id="container">
+  <div id="boardAdmin">
+    <h2 id="boardAdminH2">프로젝트</h2>
+  </div>
+
+<table border="1" style="width: 100%; text-align: center; margin-top: 10px; table-layout: fixed;">
+    <thead>
+      <tr>
+      <th style="width: 40%;">썸네일</th>
+      <th style="width: 20%;">이름</th>
+      <th style="width: 30%;">소개</th>
+      <th style="width: 10%;">소요기간</th>
+      </tr>
+    </thead>
+    <tbody id="list-section">
+      
+    </tbody>
+  </table>
+</div>
+
+  <div id="footer-area"></div>
+
+  <!-- 조각 로더 -->
+  <script src="/js/layout-loader.js"></script>
+  <script src="/js/ProjectsBoardList.js"></script>
+</body>
+</html>

@@ -17,7 +17,7 @@ public class BoardReportedService {
         return boardReportedMapper.boardReportedInsert(boardReport);
     }
 
-    public int findBoardReportedCount(int userIdx, ReportType reportType)
+    public Integer findBoardReportedCount(int userIdx, ReportType reportType)
     {
         return boardReportedMapper.findBoardReportedCount(userIdx, reportType);
     }

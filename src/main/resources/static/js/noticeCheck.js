@@ -1,6 +1,8 @@
 const urlParams = new URLSearchParams(window.location.search);
 let noticeCheckIdx = urlParams.get("idx");
 
+console.log(noticeCheckIdx);
+
 //idx값 채우기
 if(noticeCheckIdx)
 {

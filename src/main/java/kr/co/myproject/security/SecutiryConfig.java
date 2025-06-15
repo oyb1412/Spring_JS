@@ -27,6 +27,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import kr.co.myproject.Util.Util;
 
 @Configuration
 @EnableWebSecurity
@@ -42,7 +43,7 @@ public class SecutiryConfig {
 				 .requestMatchers("/css/**", "/js/**", "/index.html", "/images/**", "/login.html","/api/notice/check", "/noticeCheck.html","/notice-check-page/**",
 				 "/api/notice/check/**", "/api/vote/**", "/notice-modify-page/**", "/noticeModify.html", "/api/comment/delete/**", "/api/notice/delete/**",
 				 "/api/comment/create/**", "/api/notice/add/**", "/api/notice/modify/**", "/api/user/findPassword/**", "/api/userdata/modify/**", "/api/user/data/**", "/api/admin/ban/**").permitAll()
-				 .requestMatchers("/api/user/status","/api/csrf-token","/views/common/header.html", "/views/common/sidebar.html", "/views/common/footer.html").permitAll()
+				 .requestMatchers("/api/user/status","/api/csrf-token","/views/common/header.html", "/views/common/sidebar.html", "/views/common/footer.html","/api/board/report/**").permitAll()
 				 .requestMatchers("/WEB-INF/views/**").denyAll()
 				 .requestMatchers("/", "/login-page", "/register-page", "/board-check-page/**", "/board-list-page","/login", "/register").permitAll()
 				 .requestMatchers("/logout").hasAnyAuthority("ADMIN","MANAGER","MEMBER")
@@ -116,7 +117,8 @@ public class SecutiryConfig {
 				session.setAttribute("username", authentication.getName());
 				session.setAttribute("isAuthenticated", true);
 				
-				response.sendRedirect(request.getContextPath() + "/");
+				response.sendRedirect(request.getContextPath() + Util.GetFinalURL(request));
+
 				
 				super.onAuthenticationSuccess(request, response, authentication);
 			}

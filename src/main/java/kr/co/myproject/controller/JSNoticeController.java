@@ -42,7 +42,7 @@ public class JSNoticeController {
     @Autowired
     private CommentService commentService;
 
-	private final Logger logger = LoggerFactory.getLogger(PageController.class);
+	private final Logger logger = LoggerFactory.getLogger(JSNoticeController.class);
 
     @GetMapping("/api/notice/list")
     public Map<String, Object> getNoticeList(@RequestParam(defaultValue = "1") int page,
@@ -80,7 +80,8 @@ public class JSNoticeController {
     }
 
     @GetMapping("/api/notice/check")
-    public ResponseEntity<Map<String, Object>> getNoticeCheck(@RequestParam int idx, Authentication authentication) {
+    public ResponseEntity<Map<String, Object>> getNoticeCheck(@RequestParam int idx, 
+                                                               Authentication authentication) {
         Map<String, Object> result = new HashMap<>();
         Notice notice = noticeService.findNotice(idx);
 
@@ -105,7 +106,8 @@ public class JSNoticeController {
     }
 
     @PostMapping("/api/notice/add")
-    public Map<String, Object> noticeAdd(@RequestBody Notice notice, Authentication authentication)
+    public Map<String, Object> noticeAdd(@RequestBody Notice notice,
+                                          Authentication authentication)
     {
         Map<String, Object> result = new HashMap<>();
         
@@ -162,8 +164,6 @@ public class JSNoticeController {
         result.put("success", "글 수정에 성공했습니다");
         return result;
     }
-    
-    
 
     @DeleteMapping("/api/notice/delete")
     public Map<String, Object> noticeDelete(@RequestParam int idx)
