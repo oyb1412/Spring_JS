@@ -99,9 +99,8 @@ fetch(`/api/board/check?idx=${currentPage}`)
     e.preventDefault();
     const formData = new FormData(e.target);
     const commentIdx = formData.get("commentIdx");
-    console.log(commentIdx);
 
-    fetch(`/api/comment/delete?idx=${commentIdx}&parentIdx=${currentPage}`, {
+    fetch(`/api/comment/delete?idx=${commentIdx}&parentIdx=${currentPage}&boardType=FREE`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

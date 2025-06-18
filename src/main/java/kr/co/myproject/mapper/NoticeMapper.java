@@ -34,6 +34,9 @@ public interface NoticeMapper {
 	@Update("UPDATE springboot_project_study.notice SET commentCount = commentCount + 1 WHERE idx=#{idx}")
 	public int plusNoticeCommentCount(int idx);
 
+	@Update("UPDATE springboot_project_study.notice SET commentCount = commentCount - 1 WHERE idx=#{idx}")
+	public int downNoticeCommentCount(int idx);
+
 	@Update("UPDATE springboot_project_study.notice SET upCount = upCount + 1 WHERE idx=#{idx}")
 	public int plusNoticeUpCount(int idx);
 

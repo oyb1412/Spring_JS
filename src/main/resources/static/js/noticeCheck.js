@@ -124,9 +124,8 @@ for (let i = 0; i < forms.length; i++) {
     e.preventDefault();
     const formData = new FormData(e.target);
     const commentIdx = formData.get("commentIdx");
-    console.log(commentIdx);
 
-    fetch(`/api/comment/delete?idx=${commentIdx}`, {
+    fetch(`/api/comment/delete?idx=${commentIdx}&parentIdx=${noticeCheckIdx}&boardType=NOTICE`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

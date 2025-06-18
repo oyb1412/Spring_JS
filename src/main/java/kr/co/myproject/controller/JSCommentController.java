@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import kr.co.myproject.entity.BoardType;
 import kr.co.myproject.entity.Comment;
 import kr.co.myproject.entity.User;
 import kr.co.myproject.service.BoardService;
 import kr.co.myproject.service.CommentService;
+import kr.co.myproject.service.NoticeService;
 import kr.co.myproject.service.UserService;
 
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,12 +37,16 @@ public class JSCommentController {
     @Autowired
     private BoardService boardService;
 
+    @Autowired
+    private NoticeService noticeService;
+
     private final Logger logger = LoggerFactory.getLogger(JSCommentController.class);
 
     
     @DeleteMapping("/api/comment/delete")
     public Map<String, Object> commentDelete(@RequestParam("idx") int idx,
-                                             @RequestParam("parentIdx") int parentIdx)
+                                             @RequestParam("parentIdx") int parentIdx,
+                                             @RequestParam("boardType") BoardType boardType)
     {
         Map<String, Object> result = new HashMap<>();
 
@@ -50,7 +56,15 @@ public class JSCommentController {
             return result;
         }
 
-        boardService.downBoardCommentCount(parentIdx);
+        if(boardType == BoardType.FREE)
+        {
+            boardService.downBoardCommentCount(parentIdx);
+        }
+        else
+        {
+            noticeService.downNoticeCommentCount(parentIdx);
+        }
+
 
         result.put("success", "댓글 삭제에 성공했습니다");
         return result;
@@ -77,8 +91,14 @@ public class JSCommentController {
             return result;
         }
 
-        logger.info("idx" + comment.getParentIdx());
-        boardService.plusBoardCommentCount(comment.getParentIdx());
+        if(comment.getBoardType() == BoardType.FREE)
+        {
+            boardService.plusBoardCommentCount(comment.getParentIdx());
+        }
+        else if(comment.getBoardType() == BoardType.NOTICE)
+        {
+            noticeService.plusNoticeCommentCount(comment.getParentIdx());
+        }
 
         result.put("success", "코멘트 작성에 성공했습니다");
         return result;

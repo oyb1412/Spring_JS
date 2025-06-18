@@ -59,6 +59,16 @@ public class NoticeService {
 		return noticeMapper.findNotice(idx);
 	}
 
+	public int plusNoticeCommentCount(int idx)
+	{
+		return noticeMapper.plusNoticeCommentCount(idx);
+	}
+
+	public int downNoticeCommentCount(int idx)
+	{
+		return noticeMapper.downNoticeCommentCount(idx);
+	}
+
 	public List<Notice> searchNoticeListPaged(@Param("searchType") String searchType,
     @Param("keyword") String keyword,
     @Param("start") int start,
